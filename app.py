@@ -6,9 +6,9 @@ from gtts import gTTS
 from PIL import Image
 import base64
 
-# -------------------------------
+
 # CONFIGURACIÓN DE PÁGINA
-# -------------------------------
+
 
 st.set_page_config(
     page_title="Escúchalo - Lector Accesible",
@@ -16,9 +16,9 @@ st.set_page_config(
     layout="centered"
 )
 
-# -------------------------------
+
 # ESTILO PERSONALIZADO
-# -------------------------------
+
 
 st.markdown("""
 <style>
@@ -40,40 +40,39 @@ h1, h2, h3 {
 </style>
 """, unsafe_allow_html=True)
 
-# -------------------------------
+
 # HEADER
-# -------------------------------
+
 
 st.markdown("## 🎧 Escúchalo")
 st.markdown("### Lector Accesible de Texto a Voz")
 st.markdown("Convierte cualquier texto en una experiencia auditiva accesible.")
 
 # Imagen (cámbiala por una más minimalista si deseas)
-image = Image.open('gato_raton.png')
+image = Image.open('gato.jpg')
 st.image(image, width=300)
 
 st.markdown("---")
 
-# -------------------------------
+
 # SIDEBAR
-# -------------------------------
 
 with st.sidebar:
     st.header("⚙ Opciones")
     st.markdown("Selecciona el idioma y velocidad de lectura.")
 
-# -------------------------------
+
 # CREAR CARPETA TEMP
-# -------------------------------
+
 
 try:
     os.mkdir("temp")
 except:
     pass
 
-# -------------------------------
+
 # ENTRADA DE TEXTO
-# -------------------------------
+
 
 st.subheader("📥 Escribe o pega tu texto:")
 
@@ -88,9 +87,9 @@ if text:
     word_count = len(text.split())
     st.caption(f"Cantidad de palabras: {word_count}")
 
-# -------------------------------
+
 # SELECCIÓN DE IDIOMA
-# -------------------------------
+
 
 option_lang = st.selectbox(
     "🌎 Selecciona el idioma",
@@ -102,15 +101,15 @@ if option_lang == "Español":
 else:
     lg = "en"
 
-# -------------------------------
+
 # OPCIÓN DE LECTURA LENTA
-# -------------------------------
+
 
 slow_option = st.checkbox("🔎 Lectura lenta (Recomendado para dislexia o baja visión)")
 
-# -------------------------------
+
 # FUNCIÓN TEXTO A VOZ
-# -------------------------------
+
 
 def text_to_speech(text, lg, slow_option):
     
@@ -127,9 +126,9 @@ def text_to_speech(text, lg, slow_option):
     return file_path
 
 
-# -------------------------------
+
 # BOTÓN GENERAR AUDIO
-# -------------------------------
+
 
 if st.button("▶ Generar Audio"):
 
@@ -149,9 +148,9 @@ if st.button("▶ Generar Audio"):
         href = f'<a href="data:audio/mp3;base64,{b64}" download="audio.mp3">⬇ Descargar audio</a>'
         st.markdown(href, unsafe_allow_html=True)
 
-# -------------------------------
+
 # LIMPIAR ARCHIVOS ANTIGUOS
-# -------------------------------
+
 
 def remove_files(n):
     mp3_files = glob.glob("temp/*.mp3")
